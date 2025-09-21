@@ -1,22 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Stack, Typography } from '@mui/material'
-import z from 'zod'
-import { Counter } from '~/components/Counter'
-
+import { CourtneyCarousel, CourtneyList } from '~/components/CourtneyCarousel'
 export const Route = createFileRoute('/')({
-  validateSearch: z.object({
-    count: z.number().optional(),
-  }),
-  component: RouteComponent,
+  component: Home,
 })
 
-function RouteComponent() {
+function Home() {
   return (
-    <Stack alignItems="center">
-      <Typography variant="h1" marginBlockEnd={4}>
-        Hello world!
-      </Typography>
-      <Counter />
-    </Stack>
+    <div className="p-2 flex justify-center pt-6">
+      <CourtneyCarousel list={CourtneyList} />
+    </div>
   )
 }

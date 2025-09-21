@@ -1,0 +1,46 @@
+{
+  "../../../~start/default-client-entry.tsx": {
+    "file": "assets/main-DNZZ-PP3.js",
+    "name": "main",
+    "src": "../../../~start/default-client-entry.tsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/routes/test.tsx?tsr-split=component",
+      "src/routes/index.tsx?tsr-split=component"
+    ],
+    "assets": [
+      "assets/app-CA--dYc2.css"
+    ]
+  },
+  "/Users/ianmatthews/Courtney/src/styles/app.css": {
+    "file": "assets/app-CA--dYc2.css",
+    "src": "/Users/ianmatthews/Courtney/src/styles/app.css"
+  },
+  "_CourtneyCarousel-BTmDuQEf.js": {
+    "file": "assets/CourtneyCarousel-BTmDuQEf.js",
+    "name": "CourtneyCarousel",
+    "imports": [
+      "../../../~start/default-client-entry.tsx"
+    ]
+  },
+  "src/routes/index.tsx?tsr-split=component": {
+    "file": "assets/index-CTUYJr-U.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "../../../~start/default-client-entry.tsx",
+      "_CourtneyCarousel-BTmDuQEf.js"
+    ]
+  },
+  "src/routes/test.tsx?tsr-split=component": {
+    "file": "assets/test-C8HSfhvU.js",
+    "name": "test",
+    "src": "src/routes/test.tsx?tsr-split=component",
+    "isDynamicEntry": true,
+    "imports": [
+      "../../../~start/default-client-entry.tsx",
+      "_CourtneyCarousel-BTmDuQEf.js"
+    ]
+  }
+}
