@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/carousel"
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
-import { getStore } from "@netlify/blobs";
+import { checkBlobStorage, storeInBlobStorage } from "~/lib/BlobUtils";
 
 export const CourtneyList = [
   "JC Derula",
@@ -50,9 +50,14 @@ export function CourtneyCarousel({ list }: { list: CourtneyCarouselProps[] }) {
         // Generate images sequentially for each item
         for (const item of list) {
           if (item.imagePrompt != null) {
-            const imageUrl = await generateImage(item.imagePrompt) || null;
-
-            tempImageUrls[item.id] = imageUrl || null;
+            const blobUrl = await checkBlobStorage(item.text);
+            if (blobUrl != null) {
+              tempImageUrls[item.id] = blobUrl;
+            } else {
+              const imageUrl = await generateImage(item) || null;
+  
+              tempImageUrls[item.id] = imageUrl || null;
+            }
           }
         }
 
@@ -74,9 +79,10 @@ export function CourtneyCarousel({ list }: { list: CourtneyCarouselProps[] }) {
     };
   }, [list]);
 
-  async function generateImage(prompt: string) {
+  async function generateImage(item: CourtneyCarouselProps) {
+    console.log('Generating image for:', item);
     // append prompt with instruction to generate an image. We want it to be silly cartoony style
-    prompt += ' in a silly cartoony style';
+    const prompt = item.imagePrompt + ' in a silly cartoony style without speech bubbles';
 
     // Set responseModalities to include "Image" so the model can generate
     const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
@@ -99,6 +105,7 @@ export function CourtneyCarousel({ list }: { list: CourtneyCarouselProps[] }) {
         if (part.text) {
         } else if (part.inlineData) {
           const imageData = part.inlineData.data;
+          storeInBlobStorage(item.text, imageData);
           const blob = await fetch(
             `data:${part.inlineData.mimeType};base64,${imageData}`
           ).then(res => res.blob());
@@ -146,3 +153,5 @@ export function CourtneyCarousel({ list }: { list: CourtneyCarouselProps[] }) {
     </Carousel>
   )
 }
+
+
