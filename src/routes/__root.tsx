@@ -29,10 +29,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   return (
     <html>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <HeadContent />
       </head>
-      <body className='h-screen'>
-        <div className="p-2 flex gap-2 text-lg">
+      <body>
+        {/* <div className="p-2 flex gap-2 text-lg">
           <Link
             to="/"
             activeProps={{
@@ -52,7 +53,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             Test
           </Link>
         </div>
-        <hr />
+        <hr /> */}
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />

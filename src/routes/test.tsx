@@ -1,14 +1,83 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { GoogleSheetManager } from '~/components/GoogleSheetManager'
-// import { CourtneyCarousel } from '~/components/CourtneyCarousel'
+// import { createFileRoute } from '@tanstack/react-router'
+// import { GoogleSheetManager } from '~/components/GoogleSheetManager'
+// // import { CourtneyCarousel } from '~/components/CourtneyCarousel'
 export const Route = createFileRoute('/test')({
-  component: Test,
+  component: App,
 })
 
-function Test() {
-  return (
-    <div className="p-2 flex justify-center pt-6">
-      <GoogleSheetManager />
-    </div>
-  )
+// function Test() {
+//   return (
+//     <div className="p-2 flex justify-center pt-6">
+//       <GoogleSheetManager />
+//     </div>
+//   )
+// }
+import React, { useState } from 'react';
+// import { Carousel } from './components/Carousel';
+// import { AddSayingForm } from './components/AddSayingForm';
+import { ChevronDownIcon } from 'lucide-react';
+import { Carousel2 } from '~/components/ui/Carousel2';
+// Define the type for our sayings
+export type Saying = {
+  id: string;
+  text: string;
+  imageUrl: string;
+};
+export function App() {
+  // Initial sample data
+  const [sayings, setSayings] = useState<Saying[]>([{
+    id: '1',
+    text: 'I thought the moon was following me home last night, so I took a different route to lose it.',
+    imageUrl: 'https://images.unsplash.com/photo-1522030299830-16b8d1d4bc80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+  }, {
+    id: '2',
+    text: "I don't trust stairs. They're always up to something.",
+    imageUrl: 'https://images.unsplash.com/photo-1594388384098-8d3fca26fe7c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+  }, {
+    id: '3',
+    text: 'I tried to catch fog yesterday. I mist.',
+    imageUrl: 'https://images.unsplash.com/photo-1485236715568-ddc5ee6ca227?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80'
+  }]);
+  const addSaying = (newSaying: Omit<Saying, 'id'>) => {
+    const id = Date.now().toString();
+    setSayings([...sayings, {
+      ...newSaying,
+      id
+    }]);
+  };
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  return <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-100 p-4 md:p-8">
+      <div className="max-w-4xl mx-auto">
+        <header className="text-center mb-8 md:mb-12">
+          <h1 className="text-3xl md:text-4xl font-bold text-indigo-800 mb-2">
+            Ridiculous Friend Sayings
+          </h1>
+          <p className="text-gray-600">
+            A collection of the most absurd things my friend has said
+          </p>
+        </header>
+        <main>
+          {/* Carousel Section */}
+          <section className="mb-12">
+            <Carousel2 sayings={sayings} />
+          </section>
+          {/* Add New Saying Section */}
+          <section>
+            <div className="flex justify-center mb-4">
+              <button onClick={() => setIsFormVisible(!isFormVisible)} className="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full font-medium transition-all">
+                {isFormVisible ? 'Hide Form' : 'Add New Saying'}
+                <ChevronDownIcon className={`w-5 h-5 transition-transform ${isFormVisible ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+            {/* {isFormVisible && <div className="transition-all duration-300">
+                <AddSayingForm onAddSaying={addSaying} />
+              </div>} */}
+          </section>
+        </main>
+        <footer className="mt-12 text-center text-gray-500 text-sm">
+          <p>© {new Date().getFullYear()} Ridiculous Sayings Collector</p>
+        </footer>
+      </div>
+    </div>;
 }

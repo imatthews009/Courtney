@@ -11,6 +11,7 @@ import {
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 import { checkBlobStorage, storeInBlobStorage } from "~/lib/BlobUtils";
+import { Carousel2 } from "./ui/Carousel2";
 
 export const CourtneyList = [
   "JC Derula",
@@ -120,37 +121,43 @@ export function CourtneyCarousel({ list }: { list: CourtneyCarouselProps[] }) {
   }
 
   return (
-    <Carousel className="w-[70svw] text-2xl md:text-4xl font-semibold md:max-w-xl lg:max-w-2xl">
-      <CarouselContent>
-        {list.map((row, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex flex-col items-center justify-center p-6 min-h-[60svh] gap-4">
-                  <span className="text-4xl font-semibold">{row.text}</span>
-                  {isLoading && row.imagePrompt && !generatedImageUrls[row.id] ? (
-                    <div>Generating image...</div>
-                  ) : null}
-                  {row.imagePrompt && (
-                    <div className="w-full max-w-md">
-                      {generatedImageUrls[row.id] && (
-                        <img
-                          src={generatedImageUrls[row.id]!}
-                          alt="AI Generated"
-                          className="w-full h-auto rounded-lg shadow-lg"
-                        />
-                      )}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious size='lg' />
-      <CarouselNext size='lg' />
-    </Carousel>
+    <Carousel2 sayings={list.map(item => ({
+      id: item.id.toString(),
+      text: item.text,
+      imageUrl: generatedImageUrls[item.id] || 'https://via.placeholder.com/400x300?text=No+Image'
+    }))} />
+    // Using the new Carousel2 component
+    // <Carousel className="w-[70svw] text-2xl md:text-4xl font-semibold md:max-w-xl lg:max-w-2xl">
+    //   <CarouselContent>
+    //     {list.map((row, index) => (
+    //       <CarouselItem key={index}>
+    //         <div className="p-1">
+    //           <Card>
+    //             <CardContent className="flex flex-col items-center justify-center p-6 min-h-[60svh] gap-4">
+    //               <span className="text-4xl font-semibold">{row.text}</span>
+    //               {isLoading && row.imagePrompt && !generatedImageUrls[row.id] ? (
+    //                 <div>Generating image...</div>
+    //               ) : null}
+    //               {row.imagePrompt && (
+    //                 <div className="w-full max-w-md">
+    //                   {generatedImageUrls[row.id] && (
+    //                     <img
+    //                       src={generatedImageUrls[row.id]!}
+    //                       alt="AI Generated"
+    //                       className="w-full h-auto rounded-lg shadow-lg"
+    //                     />
+    //                   )}
+    //                 </div>
+    //               )}
+    //             </CardContent>
+    //           </Card>
+    //         </div>
+    //       </CarouselItem>
+    //     ))}
+    //   </CarouselContent>
+    //   <CarouselPrevious size='lg' />
+    //   <CarouselNext size='lg' />
+    // </Carousel>
   )
 }
 

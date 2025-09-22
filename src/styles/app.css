@@ -1,7 +1,8 @@
-@import 'tailwindcss' source('../');
-@import "tw-animate-css";
+/* @import 'tailwindcss' source('../');
+@import "tw-animate-css"; */
+@import "tailwindcss";
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *));
 
 @layer base {
   html {
@@ -136,4 +137,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
+} */
