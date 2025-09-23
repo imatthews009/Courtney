@@ -22,7 +22,7 @@ export function useGoogleSheet() {
 
     const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
     const SHEET_ID = import.meta.env.VITE_GOOGLE_SHEET_ID;
-    const RANGE = 'Sheet1!A1:B10'; // Adjust range as needed
+    const RANGE = 'Sheet1!A1:B30'; // Adjust range as needed
 
     async function generateImage(item: GoogleSheetRow) {
         // append prompt with instruction to generate an image. We want it to be silly cartoony style

@@ -1,1 +1,0 @@
-import{j as t}from"./main-DNZZ-PP3.js";import{C as s,a as e}from"./CourtneyCarousel-BTmDuQEf.js";function n(){return t.jsx("div",{className:"p-2 flex justify-center pt-6",children:t.jsx(s,{list:e})})}export{n as component};
