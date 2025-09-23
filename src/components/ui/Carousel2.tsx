@@ -7,7 +7,7 @@ type CarouselProps = {
 export type Saying = {
   id: string;
   text: string;
-  imageUrl: string;
+  imageUrl: string | null | undefined;
 };
 export const Carousel2: React.FC<CarouselProps> = ({
   sayings
@@ -39,9 +39,9 @@ export const Carousel2: React.FC<CarouselProps> = ({
       <div className="bg-white rounded-xl shadow-lg overflow-hidden">
         <div className="md:flex">
           {/* Image Section */}
-          <div className="md:w-1/2 h-64 md:h-96 relative">
+          {sayings[currentIndex].imageUrl && (<div className="md:w-1/2 h-64 md:h-96 relative">
             <img src={sayings[currentIndex].imageUrl} alt={`Illustration for saying ${currentIndex + 1}`} className="w-full h-full object-cover" />
-          </div>
+          </div>)}
           {/* Text Section */}
           <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
             <div className="mb-4">

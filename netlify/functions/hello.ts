@@ -52,7 +52,6 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
     const data = await store.get(key);
     // get metadata to check age
     // const metadata = await store.getMetadata(key);
-    if (data) console.log('data found');
     return {
         statusCode: 200,
         body: JSON.stringify({ 

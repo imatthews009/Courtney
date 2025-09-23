@@ -81,7 +81,6 @@ export function CourtneyCarousel({ list }: { list: CourtneyCarouselProps[] }) {
   }, [list]);
 
   async function generateImage(item: CourtneyCarouselProps) {
-    console.log('Generating image for:', item);
     // append prompt with instruction to generate an image. We want it to be silly cartoony style
     const prompt = item.imagePrompt + ' in a silly cartoony style without speech bubbles';
 
